@@ -18,7 +18,7 @@ class Group(models.Model):
     
     class Meta:
         verbose_name = 'Group'
-        verbose_name_plural = 'Groups'
+        verbose_name_plural = 'Grupos'
         ordering = ['name']
         
         
@@ -37,8 +37,8 @@ class Category(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+        verbose_name = 'Categoría'
+        verbose_name_plural = 'Categorías'
         
 
 class Link(models.Model):
