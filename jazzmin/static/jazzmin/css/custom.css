@@ -105,6 +105,18 @@ input[type=checkbox], input[type=radio] {
   color: #ffffff !important;
 }
 
+.select2-selection__choice {
+  background-color: #3a2546 !important;
+  color: #ffffff !important;
+}
+.select2-selection__choice .select2-selection__choice__display {
+  padding-right: 10px !important;
+  padding-left: 7px !important;
+}
+.select2-selection__choice .select2-selection__choice__remove {
+  margin-left: 0 !important;
+}
+
 @media screen and (max-width: 768px) {
   .container-fluid > .row > div:nth-child(1) {
     flex-direction: column !important;
