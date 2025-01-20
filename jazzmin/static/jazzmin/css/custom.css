@@ -3,111 +3,106 @@
 }
 
 .jazzmin-page {
-  background: #0c2110;
+  background: #ffffff;
 }
 .jazzmin-page img {
-  width: 200px;
+  width: 100px;
 }
 .jazzmin-page .card-body {
-  background: #010d04;
-  color: #fefefe;
+  background: #9b82aa;
+  color: #3a2546;
 }
 
 .content-wrapper {
-  background-color: #fefefe;
+  background-color: #ffffff;
+}
+
+.brand-image {
+  width: auto !important;
+  height: 40px !important;
+  border-radius: 0 !important;
 }
 
 a {
-  color: #0c2110 !important;
+  color: #3a2546 !important;
   font-weight: bold;
   duration: 0.2s;
 }
 a:hover {
-  color: #010d04 !important;
+  color: #9b82aa !important;
 }
 
 [class*=sidebar-dark-] {
-  background-color: #0c2110;
+  background-color: #3a2546;
 }
 [class*=sidebar-dark-] a {
-  color: #fefefe !important;
+  color: #ffffff !important;
 }
 [class*=sidebar-dark-] a:hover {
-  color: #b79651 !important;
+  color: #f5e673 !important;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-danger:hover, .btn-danger:focus, .btn-danger:active {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
 }
 
 .btn-success {
-  background-color: #b79651;
-  border-color: #b79651;
-  color: #010d04 !important;
+  background-color: #f5e673;
+  border-color: #f5e673;
+  color: #000000 !important;
   font-weight: bold;
-}
-.btn-success:hover, .btn-success:focus, .btn-success:active {
-  background-color: #010d04 !important;
-  border-color: #010d04 !important;
-  color: #fefefe !important;
 }
 
 .btn-info, .btn-secondary {
-  background-color: #8bb138;
-  border-color: #8bb138;
-  color: #010d04 !important;
+  background-color: #73cbcd;
+  border-color: #73cbcd;
+  color: #000000 !important;
   font-weight: bold;
 }
-.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
-  background-color: #010d04 !important;
-  border-color: #010d04 !important;
-  color: #fefefe !important;
-}
+
 .btn-primary, .btn-danger {
-  background-color: #0c2110;
-  border-color: #0c2110;
-  color: #fefefe !important;
+  background-color: #3a2546;
+  border-color: #3a2546;
+  color: #ffffff !important;
   font-weight: bold;
-}
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-danger:hover, .btn-danger:focus, .btn-danger:active {
-  background-color: #b79651 !important;
-  border-color: #b79651 !important;
-  color: #010d04 !important;
 }
 
 .select2-results__option--highlighted {
-  background-color: rgba(12, 33, 16, 0.5) !important;
+  background-color: rgba(58, 37, 70, 0.5) !important;
 }
 
 .nav-link.active {
-  background-color: #b79651 !important;
-  color: #010d04 !important;
+  background-color: #f5e673 !important;
+  color: #000000 !important;
   transition-duration: 0.2s;
 }
 .nav-link.active:hover {
-  color: rgba(1, 13, 4, 0.5) !important;
-}
-
-.collapsible-header:hover {
-  background-color: rgba(12, 33, 16, 0.8) !important;
+  opacity: 0.8;
+  color: #000000 !important;
 }
 
 input[type=checkbox], input[type=radio] {
-  accent-color: #0c2110;
+  accent-color: #3a2546;
 }
 
 .selector-chosen h2 {
-  background-color: #0c2110;
+  background-color: #3a2546;
 }
 
 .calendar td.selected a {
-  background-color: #0c2110;
+  background-color: #3a2546;
 }
 
 .calendar caption, .clockbox h2 {
-  background-color: #0c2110;
-  color: #fefefe;
+  background-color: #3a2546;
+  color: #ffffff;
 }
 
 .clockbox a:hover {
-  background-color: #0c2110;
-  color: #fefefe !important;
+  background-color: #3a2546;
+  color: #ffffff !important;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,3 +1,5 @@
 INFO 2025-01-20 10:36:59,887 autoreload Watching for file changes with StatReloader
 WARNING 2025-01-20 10:37:04,577 log Not Found: /favicon.ico
 INFO 2025-01-20 10:49:33,092 autoreload Watching for file changes with StatReloader
+INFO 2025-01-20 12:48:56,750 autoreload D:\django\mi-caja-de-herramientas-dashboard\project\settings.py changed, reloading.
+INFO 2025-01-20 12:48:57,332 autoreload Watching for file changes with StatReloader

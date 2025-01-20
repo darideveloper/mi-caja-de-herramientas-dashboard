@@ -3,30 +3,35 @@
 // Login page
 // Overwrite the default jazzmin app login page styles
 .jazzmin-page
-    background: $color-green
+    background: $color-white
 
     img
-        width: 200px
+        width: 100px
 
     .card-body
-        background: $color-black
-        color: $color-white
+        background: $color-purple
+        color: $color-purple-dark
 
 // Dahsboard
 // Overwrite the default jazzmin app dashboard styles
 .content-wrapper
     background-color: $color-white
 
+.brand-image
+    width: auto !important
+    height: 40px !important
+    border-radius: 0 !important
+
 a
-    color: $color-green !important
+    color: $color-purple-dark !important
     font-weight: bold
     duration: 0.2s
 
     &:hover
-        color: $color-black !important
+        color: $color-purple !important
 
 [class*=sidebar-dark-]
-    background-color: $color-green
+    background-color: $color-purple-dark
 
     a
         color: $color-white !important
@@ -34,42 +39,35 @@ a
         &:hover
             color: $color-yellow !important
 
+.btn-success, .btn-info, .btn-secondary, .btn-danger
+
+    &:hover, &:focus, &:active
+        background-color: $color-black !important
+        border-color: $color-black !important
+        color: $color-white !important
+
 .btn-success
     background-color: $color-yellow
     border-color: $color-yellow
     color: $color-black !important
     font-weight: bold
 
-    &:hover, &:focus, &:active
-        background-color: $color-black !important
-        border-color: $color-black !important
-        color: $color-white !important
 
 .btn-info, .btn-secondary
-    background-color: $color-green-light
-    border-color: $color-green-light
+    background-color: $color-blue
+    border-color: $color-blue
     color: $color-black !important
     font-weight: bold
 
-    &:hover, &:focus, &:active
-        &:hover, &:focus, &:active
-        background-color: $color-black !important
-        border-color: $color-black !important
-        color: $color-white !important
 
 .btn-primary, .btn-danger
-    background-color: $color-green
-    border-color: $color-green
+    background-color: $color-purple-dark
+    border-color: $color-purple-dark
     color: $color-white !important
     font-weight: bold
 
-    &:hover, &:focus, &:active
-        background-color: $color-yellow !important
-        border-color: $color-yellow !important
-        color: $color-black !important
-
 .select2-results__option--highlighted
-    background-color: rgba($color-green, 0.5) !important
+    background-color: rgba($color-purple-dark, 0.5) !important
 
 .nav-link.active
     background-color: $color-yellow !important
@@ -77,27 +75,31 @@ a
     transition-duration: 0.2s
 
     &:hover
-        color: rgba($color-black, 0.5) !important
+        opacity: 0.8
+        color: $color-black !important
 
-.collapsible-header:hover
-    background-color: rgba($color-green, 0.8) !important
+// .collapsible-header:hover
+//     background-color: rgba($color-purple-dark, 0.8) !important
 
 input[type=checkbox], input[type=radio]
-    accent-color: $color-green
+    accent-color: $color-purple-dark
 
 .selector-chosen h2
-    background-color: $color-green
+    background-color: $color-purple-dark
 
 .calendar td.selected a
-    background-color: $color-green
+    background-color: $color-purple-dark
 
 .calendar caption, .clockbox h2
-    background-color: $color-green
+    background-color: $color-purple-dark
     color: $color-white
 
 .clockbox a:hover
-    background-color: $color-green
+    background-color: $color-purple-dark
     color: $color-white !important
+
+
+
 
 // Fix dashboard responsive
 @media screen and (max-width: 768px)
