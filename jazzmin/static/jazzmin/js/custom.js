@@ -6,14 +6,16 @@ class AdminSetup {
   constructor() {
 
     // Get current page without domain
-    this.currrentUrl = window.location.href
-    this.currentPage = this.currrentUrl.replace(window.location.origin, "")
+    this.currentPage = document.querySelector("h1").textContent.toLowerCase().trim()
+    console.log("Current page:", this.currentPage)
 
     // Globals css selectors
     this.selectors = {
-      "icon": '.field-icon > a',
-      "image": '.field-image > a',
-      "url": '.field-url',
+      "icon": '.field-icon a',
+      "image": '.field-image a',
+      "url": 'td.field-url',
+      "video": '.field-video a',
+      "audio": '.field-audio a',
     }
 
     // Autorun functions
@@ -26,16 +28,40 @@ class AdminSetup {
    * @param {string} selector - The css selector to find the images
    * @param {string} className - The class name to add to the image
    */
-  #renderBaseImage(selector, className) {
-    const images = document.querySelectorAll(selector)
-    images.forEach(image_wrapper => {
-      const link = image_wrapper.href
-      const image_elem = document.createElement("img")
-      image_elem.classList.add(className)
-      image_elem.src = link
-      image_wrapper.innerHTML = ""
-      image_wrapper.appendChild(image_elem)
-    })
+  #renderBaseImage(imageWrapper, className) {
+    // Get link
+    const link = imageWrapper.href
+
+    // Create image tag
+    const imageElem = document.createElement("img")
+    imageElem.classList.add(className)
+    imageElem.classList.add("rendered-media")
+    imageElem.src = link
+
+    // Append element to the wrapper
+    imageWrapper.innerHTML = ""
+    imageWrapper.appendChild(imageElem)
+  }
+
+  #renderBaseAudioVideo(mediaWrapper, isVideo) {
+    // Get link
+    const link = mediaWrapper.href
+
+    // Create audio or video tag
+    const mediaElem = isVideo ? document.createElement("video") : document.createElement("audio")
+    mediaElem.classList.add("rendered-media")
+    mediaElem.classList.add(isVideo ? "rendered-video" : "rendered-audio")
+    mediaElem.controls = true
+
+    // Create source tag
+    const sourceElem = document.createElement("source")
+    sourceElem.src = link
+    sourceElem.type = isVideo ? "video/mp4" : "audio/mp3"
+
+    // Append elements to the wrappers
+    mediaElem.appendChild(sourceElem)
+    mediaWrapper.innerHTML = ""
+    mediaWrapper.appendChild(mediaElem)
   }
 
 
@@ -43,14 +69,37 @@ class AdminSetup {
    * Render icon images
    */
   renderIcons() {
-    this.#renderBaseImage(this.selectors.icon, "rendered-icon")
+    const icons = document.querySelectorAll(this.selectors.icon)
+    icons.forEach(iconWrapper => {
+      this.#renderBaseImage(iconWrapper, "rendered-icon")
+    })
   }
 
   /**
    * Render regular image images
    */
   renderImages() {
-    this.#renderBaseImage(this.selectors.image, "rendered-image")
+    const images = document.querySelectorAll(this.selectors.image)
+    images.forEach(imageWrapper => {
+      this.#renderBaseImage(imageWrapper, "rendered-image")
+    })
+  }
+
+  /**
+   * Render videos
+   */
+  renderVideos() {
+    const videos = document.querySelectorAll(this.selectors.video)
+    videos.forEach(videoWrapper => {
+      this.#renderBaseAudioVideo(videoWrapper, true)
+    })
+  }
+
+  renderAudios() {
+    const audios = document.querySelectorAll(this.selectors.audio)
+    audios.forEach(audioWrapper => {
+      this.#renderBaseAudioVideo(audioWrapper, false)
+    })
   }
 
   /**
@@ -59,15 +108,15 @@ class AdminSetup {
   renderUrls() {
     const urls = document.querySelectorAll(this.selectors.url)
     console.log(urls)
-    urls.forEach(url_wrapper => {
-      const link = url_wrapper.textContent
-      const link_elem = document.createElement("a")
-      link_elem.classList.add("url-link")
-      link_elem.href = link
-      link_elem.innerText = link
-      link_elem.target = "_blank"
-      url_wrapper.innerHTML = ""
-      url_wrapper.appendChild(link_elem)
+    urls.forEach(urlWrapper => {
+      const link = urlWrapper.textContent
+      const linkElem = document.createElement("a")
+      linkElem.classList.add("url-link")
+      linkElem.href = link
+      linkElem.innerText = link
+      linkElem.target = "_blank"
+      urlWrapper.innerHTML = ""
+      urlWrapper.appendChild(linkElem)
     })
   }
 
@@ -77,10 +126,10 @@ class AdminSetup {
   autorun() {
     // Methods to run for each page
     const methods = {
-      "/admin/blog/category/": [this.renderIcons],
-      "/admin/blog/group/": [this.renderIcons],
-      "/admin/blog/link/": [this.renderIcons, this.renderUrls],
-      "/admin/blog/post/": [this.renderImages],
+      "categorías": [this.renderIcons],
+      "grupos": [this.renderIcons],
+      "links": [this.renderIcons, this.renderUrls],
+      "posts": [this.renderImages, this.renderVideos, this.renderAudios],
     }
 
     // Run the methods for the current page
