@@ -42,7 +42,7 @@ a:hover {
   color: #f5e673 !important;
 }
 
-.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-danger:hover, .btn-danger:focus, .btn-danger:active {
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background-color: #000000 !important;
   border-color: #000000 !important;
   color: #ffffff !important;
@@ -135,4 +135,18 @@ input[type=checkbox], input[type=radio] {
 }
 .sidebar {
   overflow: hidden !important;
+}
+
+.rendered-image, .rendered-video {
+  width: 100px;
+  height: auto;
+}
+
+.rendered-icon {
+  width: 35px;
+  height: auto;
+}
+
+#result_list td .field-logo, #result_list td .field-image, #result_list td .field-video, #result_list td .field-audio, #result_list td .field-icon {
+  text-align: left;
 }/*# sourceMappingURL=custom.css.map */

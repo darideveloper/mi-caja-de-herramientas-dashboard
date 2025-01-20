@@ -22,7 +22,7 @@ class LinkAdmin(admin.ModelAdmin):
 
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'group', 'category', 'created_at')
+    list_display = ('title', 'group', 'category', 'created_at', 'image')
     search_fields = ('title', 'text')
     search_help_text = 'Buscar por título o texto'
     list_filter = ('group', 'category', 'created_at', 'updated_at')
