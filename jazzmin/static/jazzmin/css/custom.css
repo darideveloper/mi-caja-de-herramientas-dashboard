@@ -1,0 +1,131 @@
+.debug {
+  border: 1px solid red;
+}
+
+.jazzmin-page {
+  background: #0c2110;
+}
+.jazzmin-page img {
+  width: 200px;
+}
+.jazzmin-page .card-body {
+  background: #010d04;
+  color: #fefefe;
+}
+
+.content-wrapper {
+  background-color: #fefefe;
+}
+
+a {
+  color: #0c2110 !important;
+  font-weight: bold;
+  duration: 0.2s;
+}
+a:hover {
+  color: #010d04 !important;
+}
+
+[class*=sidebar-dark-] {
+  background-color: #0c2110;
+}
+[class*=sidebar-dark-] a {
+  color: #fefefe !important;
+}
+[class*=sidebar-dark-] a:hover {
+  color: #b79651 !important;
+}
+
+.btn-success {
+  background-color: #b79651;
+  border-color: #b79651;
+  color: #010d04 !important;
+  font-weight: bold;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+  background-color: #010d04 !important;
+  border-color: #010d04 !important;
+  color: #fefefe !important;
+}
+
+.btn-info, .btn-secondary {
+  background-color: #8bb138;
+  border-color: #8bb138;
+  color: #010d04 !important;
+  font-weight: bold;
+}
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+  background-color: #010d04 !important;
+  border-color: #010d04 !important;
+  color: #fefefe !important;
+}
+.btn-primary, .btn-danger {
+  background-color: #0c2110;
+  border-color: #0c2110;
+  color: #fefefe !important;
+  font-weight: bold;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-danger:hover, .btn-danger:focus, .btn-danger:active {
+  background-color: #b79651 !important;
+  border-color: #b79651 !important;
+  color: #010d04 !important;
+}
+
+.select2-results__option--highlighted {
+  background-color: rgba(12, 33, 16, 0.5) !important;
+}
+
+.nav-link.active {
+  background-color: #b79651 !important;
+  color: #010d04 !important;
+  transition-duration: 0.2s;
+}
+.nav-link.active:hover {
+  color: rgba(1, 13, 4, 0.5) !important;
+}
+
+.collapsible-header:hover {
+  background-color: rgba(12, 33, 16, 0.8) !important;
+}
+
+input[type=checkbox], input[type=radio] {
+  accent-color: #0c2110;
+}
+
+.selector-chosen h2 {
+  background-color: #0c2110;
+}
+
+.calendar td.selected a {
+  background-color: #0c2110;
+}
+
+.calendar caption, .clockbox h2 {
+  background-color: #0c2110;
+  color: #fefefe;
+}
+
+.clockbox a:hover {
+  background-color: #0c2110;
+  color: #fefefe !important;
+}
+
+@media screen and (max-width: 768px) {
+  .container-fluid > .row > div:nth-child(1) {
+    flex-direction: column !important;
+  }
+  .container-fluid > .row > div:nth-child(1) h1 {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+  }
+  .container-fluid > .row > div:nth-child(1) ol {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+  .container-fluid > .row > div:nth-child(2) {
+    justify-content: flex-start !important;
+  }
+}
+.sidebar {
+  overflow: hidden !important;
+}/*# sourceMappingURL=custom.css.map */
