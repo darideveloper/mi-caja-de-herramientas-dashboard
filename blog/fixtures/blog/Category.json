@@ -1,0 +1,42 @@
+[
+    {
+        "model": "blog.Category",
+        "pk": 1,
+        "fields": {
+            "name": "Meditación",
+            "icon": "icons/icon-meditation.gif"
+        }
+    },
+    {
+        "model": "blog.Category",
+        "pk": 2,
+        "fields": {
+            "name": "Teachings",
+            "icon": "icons/icon-meditation.gif"
+        }
+    },
+    {
+        "model": "blog.Category",
+        "pk": 3,
+        "fields": {
+            "name": "Playlists",
+            "icon": "icons/icon-meditation.gif"
+        }
+    },
+    {
+        "model": "blog.Category",
+        "pk": 4,
+        "fields": {
+            "name": "Movimiento",
+            "icon": "icons/icon-meditation.gif"
+        }
+    },
+    {
+        "model": "blog.Category",
+        "pk": 5,
+        "fields": {
+            "name": "Journaling",
+            "icon": "icons/icon-meditation.gif"
+        }
+    }
+]

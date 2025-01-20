@@ -1,0 +1,20 @@
+[
+    {
+        "model": "blog.Link",
+        "pk": 1,
+        "fields": {
+            "name": "Instagram",
+            "icon": "icons/instagram.svg",
+            "url": "https://www.instagram.com/paocarrera.biocoach?igsh=eWtvbHNsM3FwZW1z"
+        }
+    },
+    {
+        "model": "blog.Link",
+        "pk": 2,
+        "fields": {
+            "name": "Youtube",
+            "icon": "icons/youtube.svg",
+            "url": "https://youtube.com/@paocarrera.biocoach?si=TCHx5x-BVE3hfN6r"
+        }
+    }
+]

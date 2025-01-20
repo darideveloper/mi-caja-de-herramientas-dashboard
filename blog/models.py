@@ -19,6 +19,7 @@ class Group(models.Model):
     class Meta:
         verbose_name = 'Group'
         verbose_name_plural = 'Groups'
+        ordering = ['name']
         
         
 class Category(models.Model):

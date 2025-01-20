@@ -1,0 +1,50 @@
+[
+    {
+        "model": "blog.Group",
+        "pk": 1,
+        "fields": {
+            "name": "Para balancear energía masculina y femenina",
+            "icon": "icons/icon-a.png"
+        }
+    },
+    {
+        "model": "blog.Group",
+        "pk": 2,
+        "fields": {
+            "name": "Para dejar de compararte",
+            "icon": "icons/icon-b.png"
+        }
+    },
+    {
+        "model": "blog.Group",
+        "pk": 3,
+        "fields": {
+            "name": "Para soltar y dejar ir",
+            "icon": "icons/icon-c.png"
+        }
+    },
+    {
+        "model": "blog.Group",
+        "pk": 4,
+        "fields": {
+            "name": "Para celebrar/cuando pasa algo bueno",
+            "icon": "icons/icon-d.png"
+        }
+    },
+    {
+        "model": "blog.Group",
+        "pk": 5,
+        "fields": {
+            "name": "Para después de hacer ejercicio",
+            "icon": "icons/icon-e.png"
+        }
+    },
+    {
+        "model": "blog.Group",
+        "pk": 6,
+        "fields": {
+            "name": "Para conectar con los demás/cuando estoy antisocial",
+            "icon": "icons/icon-f.png"
+        }
+    }
+]
