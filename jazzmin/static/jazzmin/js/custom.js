@@ -41,6 +41,7 @@ class AdminSetup {
     // Append element to the wrapper
     imageWrapper.innerHTML = ""
     imageWrapper.appendChild(imageElem)
+    imageWrapper.target = "_blank"
   }
 
   #renderBaseAudioVideo(mediaWrapper, isVideo) {
@@ -62,6 +63,8 @@ class AdminSetup {
     mediaElem.appendChild(sourceElem)
     mediaWrapper.innerHTML = ""
     mediaWrapper.appendChild(mediaElem)
+    mediaWrapper.target = "_blank"
+    mediaWrapper.removeAttribute("href")
   }
 
 
@@ -117,6 +120,7 @@ class AdminSetup {
       linkElem.target = "_blank"
       urlWrapper.innerHTML = ""
       urlWrapper.appendChild(linkElem)
+      urlWrapper.target = "_blank"
     })
   }
 

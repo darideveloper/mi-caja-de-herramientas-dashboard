@@ -5,8 +5,8 @@
 .jazzmin-page {
   background: #ffffff;
 }
-.jazzmin-page img {
-  width: 100px;
+.jazzmin-page .login-logo img {
+  width: 250px;
 }
 .jazzmin-page .card-body {
   background: #9b82aa;
