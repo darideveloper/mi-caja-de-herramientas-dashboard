@@ -13,7 +13,7 @@ class AdminSetup {
     this.selectors = {
       "icon": '.field-icon a',
       "image": '.field-image a',
-      "url": 'td.field-url',
+      "url": 'td.field-url, .field-url a',
       "video": '.field-video a',
       "audio": '.field-audio a',
     }

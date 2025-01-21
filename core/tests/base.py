@@ -12,6 +12,7 @@ from utils import test_data
 
 
 class TestAdminBase(LiveServerTestCase):
+    """ Base class to test admin (login and setup) """
     
     def setUp(self, endpont="/admin/"):
         """ Load data, setup and login in each test """
