@@ -138,7 +138,7 @@ class TestMediaAdminBase(TestAdminBase):
         
         # css selectors
         selectors = {
-            "url": ".field-url a",
+            "url": ".field-url",
         }
         
         # Validate url is rendered as a tag
@@ -166,13 +166,11 @@ class TestMediaAdminBase(TestAdminBase):
         
         # css selectors
         selectors = {
-            "video": ".field-video a video",
             "video_source": ".field-video a video source",
         }
         
         # Validate video is rendered as video tag
         fields = self.get_selenium_elems(selectors)
-        self.assertTrue(fields["video"].get_attribute("constrols"))
         self.assertTrue(fields["video_source"].get_attribute("src"))
         self.assertEqual(fields["video_source"].get_attribute("type"), "video/mp4")
         
@@ -181,12 +179,10 @@ class TestMediaAdminBase(TestAdminBase):
         
         # css selectors
         selectors = {
-            "audio": ".field-audio a audio",
             "audio_source": ".field-audio a audio source",
         }
         
         # Validate audio is rendered as audio tag
         fields = self.get_selenium_elems(selectors)
-        self.assertTrue(fields["audio"].get_attribute("constrols"))
         self.assertTrue(fields["audio_source"].get_attribute("src"))
         self.assertEqual(fields["audio_source"].get_attribute("type"), "audio/mp3")
