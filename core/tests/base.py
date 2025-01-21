@@ -138,7 +138,7 @@ class TestMediaAdminBase(TestAdminBase):
         
         # css selectors
         selectors = {
-            "url": ".field-url",
+            "url": 'a.url-link',
         }
         
         # Validate url is rendered as a tag
