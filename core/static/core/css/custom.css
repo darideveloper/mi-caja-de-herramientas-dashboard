@@ -117,6 +117,10 @@ input[type=checkbox], input[type=radio] {
   margin-left: 0 !important;
 }
 
+.alert a {
+  color: #ffffff !important;
+}
+
 @media screen and (max-width: 768px) {
   .container-fluid > .row > div:nth-child(1) {
     flex-direction: column !important;
@@ -133,6 +137,42 @@ input[type=checkbox], input[type=radio] {
     justify-content: flex-start !important;
   }
 }
+@media screen and (max-width: 500px) {
+  .content {
+    padding: 1rem 0 !important;
+  }
+  #changelist-search > .form-group {
+    width: 100% !important;
+  }
+  .container-fluid > .row > div:nth-child(2) {
+    justify-content: center !important;
+  }
+  .actions button {
+    margin-left: 0 !important;
+  }
+  .actions .select2, .actions > label:nth-child(1) {
+    width: 100% !important;
+  }
+  .actions > span {
+    margin-left: 0 !important;
+    display: block !important;
+  }
+  input[type=number] {
+    width: 80px !important;
+  }
+}
+.w-110 {
+  width: 110px;
+}
+
+.field-notes > textarea {
+  height: 37px;
+}
+
+.is-invalid {
+  border: 2px solid red !important;
+}
+
 .sidebar {
   overflow: hidden !important;
 }
