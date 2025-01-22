@@ -342,7 +342,7 @@ if STORAGE_AWS:
     AWS_S3_SIGNATURE_VERSION = 's3v4'
 
     # S3 Custom Domain (CloudFront is optional but recommended)
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3-accelerate.amazonaws.com'
     
     # Cache-control for static files
     AWS_S3_OBJECT_PARAMETERS = {
