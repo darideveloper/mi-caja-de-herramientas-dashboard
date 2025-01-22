@@ -1,5 +1,7 @@
 from django.db import models
+
 from blog import validators
+from project.storage_backends import PublicMediaStorage
 
 
 class Group(models.Model):
@@ -10,7 +12,8 @@ class Group(models.Model):
     )
     icon = models.ImageField(
         upload_to='icons/',
-        verbose_name='Ícono'
+        verbose_name='Ícono',
+        storage=PublicMediaStorage(),
     )
     
     def __str__(self):
@@ -30,7 +33,8 @@ class Category(models.Model):
     )
     icon = models.ImageField(
         upload_to='icons/',
-        verbose_name='Ícono'
+        verbose_name='Ícono',
+        storage=PublicMediaStorage(),
     )
     
     def __str__(self):
@@ -49,7 +53,8 @@ class Link(models.Model):
     )
     icon = models.ImageField(
         upload_to='icons/',
-        verbose_name='Ícono'
+        verbose_name='Ícono',
+        storage=PublicMediaStorage(),
     )
     url = models.URLField(
         verbose_name='URL'
@@ -95,6 +100,7 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='images/',
         verbose_name='Imagen',
+        storage=PublicMediaStorage(),
         null=True,
         blank=True,
     )
@@ -102,6 +108,7 @@ class Post(models.Model):
         upload_to='audios/',
         verbose_name='Audio',
         validators=[validators.validate_audio_extension],
+        storage=PublicMediaStorage(),
         null=True,
         blank=True,
     )
@@ -109,6 +116,7 @@ class Post(models.Model):
         upload_to='videos/',
         verbose_name='Video',
         validators=[validators.validate_video_extension],
+        storage=PublicMediaStorage(),
         null=True,
         blank=True,
     )
