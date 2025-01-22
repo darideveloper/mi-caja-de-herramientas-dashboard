@@ -127,12 +127,12 @@ class PostRenderedDataTestCase(TestMediaAdminBase):
         )
         video_file = SimpleUploadedFile(
             name=audio_name,
-            content=open(audio_path, 'rb').read(),
+            content=open(video_path, 'rb').read(),
             content_type='audio/mp3'
         )
         audio_file = SimpleUploadedFile(
             name=video_name,
-            content=open(video_path, 'rb').read(),
+            content=open(audio_path, 'rb').read(),
             content_type='video/mp4'
         )
         
