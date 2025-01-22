@@ -3,12 +3,11 @@ from time import sleep
 from django.test import LiveServerTestCase
 from django.core.management import call_command
 from django.conf import settings
+from django.contrib.auth.models import User
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
-
-from utils import test_data
 
 
 class TestAdminBase(LiveServerTestCase):
@@ -21,7 +20,7 @@ class TestAdminBase(LiveServerTestCase):
         call_command("apps_loaddata")
         
         # Create admin user
-        self.admin_user, self.admin_pass, _ = test_data.create_admin_user()
+        self.admin_user, self.admin_pass, _ = self.create_admin_user()
         
         # Setup selenium
         self.endpoint = endpont
@@ -186,3 +185,23 @@ class TestMediaAdminBase(TestAdminBase):
         fields = self.get_selenium_elems(selectors)
         self.assertTrue(fields["audio_source"].get_attribute("src"))
         self.assertEqual(fields["audio_source"].get_attribute("type"), "audio/mp3")
+        
+    def create_admin_user(self) -> tuple[str, str]:
+        """ Create a new admin user and return it
+        
+        Returns:
+            tuple:
+                str: Username of the user created
+                str: Password of the user created
+                User: User created
+        """
+        
+        # Create admin user
+        password = "admin"
+        user = User.objects.create_superuser(
+            username="admin",
+            email="test@gmail.com",
+            password=password,
+        )
+        
+        return user.username, password, user
