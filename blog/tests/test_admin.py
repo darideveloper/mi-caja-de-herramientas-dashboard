@@ -2,7 +2,7 @@ import os
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from core.tests.base import TestMediaAdminBase
+from core.test_base.test_admin import TestMediaAdminBase
 from blog import models
 
 
