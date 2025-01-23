@@ -13,6 +13,11 @@
   color: #3a2546;
 }
 
+a.dropdown-item:active {
+  background-color: #9b82aa !important;
+  color: #ffffff !important;
+}
+
 .content-wrapper {
   background-color: #ffffff;
 }
