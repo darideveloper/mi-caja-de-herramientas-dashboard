@@ -1,17 +1,21 @@
 from django.urls import path, include
-from rest_framework import routers
 from django.contrib import admin
 from django.views.generic import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
+from rest_framework import routers
+
 from core.views import (
     CustomTokenObtainPairView,
     CustomTokenRefreshView,
 )
-from django.conf import settings
-from django.conf.urls.static import static
-
+from blog import views as blog_views
 
 # Setup drf router
 router = routers.DefaultRouter()
+router.register(r'groups', blog_views.GroupViewSet)
+router.register(r'categories', blog_views.CategoryViewSet)
+router.register(r'posts', blog_views.PostViewSet)
 
 
 urlpatterns = [

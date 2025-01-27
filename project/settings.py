@@ -1,7 +1,10 @@
 import os
 import sys
 from pathlib import Path
+from datetime import timedelta
+
 from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,6 +22,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 STORAGE_AWS = os.environ.get("STORAGE_AWS") == "True"
 HOST = os.getenv('HOST')
 TEST_HEADLESS = os.getenv('TEST_HEADLESS', 'False') == 'True'
+PAGE_SIZE = int(os.getenv('PAGE_SIZE', 2))
 
 print(f"DEBUG: {DEBUG}")
 print(f"STORAGE_AWS: {STORAGE_AWS}")
@@ -375,11 +379,24 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20,
+    # DEBUG
+    'PAGE_SIZE': PAGE_SIZE,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'EXCEPTION_HANDLER': 'utils.handlers.custom_exception_handler'
+}
+
+# Setup simple jwt
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    
 }
 
 # # Set maximum upload size to 100 MB (104857600 bytes)
