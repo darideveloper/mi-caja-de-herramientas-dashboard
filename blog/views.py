@@ -39,6 +39,6 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
         # Filter by duration
         duration = self.request.query_params.get("duration", None)
         if duration:
-            queryset = queryset.filter(duration=duration)
+            queryset = queryset.filter(duration__value=duration)
             
         return queryset

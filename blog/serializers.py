@@ -28,6 +28,7 @@ class DurationSerializer(serializers.Serializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
+    duration = serializers.IntegerField(source='duration.value')
     links = LinkSerializer(many=True)
 
     class Meta:

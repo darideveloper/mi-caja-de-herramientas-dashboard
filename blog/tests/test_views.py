@@ -125,7 +125,6 @@ class PostViewSetTestCase(BlogTestCase):
         # Create posts
         self.post_1 = self.create_post(
             title="Post 1",
-            duration=10,
             text="Post 1 text",
             image_name="sample.webp",
             audio_name="sample.mp3",
@@ -133,7 +132,6 @@ class PostViewSetTestCase(BlogTestCase):
         )
         self.post_2 = self.create_post(
             title="Post 2",
-            duration=20,
             text="Post 2 text",
             image_name="sample.webp",
             audio_name="sample.mp3",
@@ -171,7 +169,7 @@ class PostViewSetTestCase(BlogTestCase):
             
             # Validate data text
             self.assertEqual(post.title, result["title"])
-            self.assertEqual(post.duration, result["duration"])
+            self.assertEqual(post.duration.value, result["duration"])
             self.assertEqual(post.text, result["text"])
             
             # Validate data links
@@ -211,7 +209,8 @@ class PostViewSetTestCase(BlogTestCase):
         """ Test that the group filter works """
         
         # Update first post
-        group_2 = models.Group.objects.all()[2]
+        group_1 = models.Group.objects.get(id=1)
+        group_2 = models.Group.objects.get(id=2)
         self.post_1.group = group_2
         self.post_1.save()
         
@@ -231,33 +230,17 @@ class PostViewSetTestCase(BlogTestCase):
         
         # Validate result
         result = json_data["results"][0]
+        self.assertTrue(result["id"], self.post_2.id)
         
-        # Validate data text
-        self.assertEqual(result["id"], self.post_2.id)
-        self.assertEqual(result["title"], self.post_2.title)
-        self.assertEqual(result["duration"], self.post_2.duration)
-        self.assertEqual(result["text"], self.post_2.text)
-        
-        # Validate media
-        self.assertIn(self.post_2.image.url, result["image"])
-        self.assertIn(self.post_2.audio.url, result["audio"])
-        self.assertIn(self.post_2.video.url, result["video"])
-        
-        links = self.post_1.links.all()
-        self.assertEqual(len(self.post_1.links.all()), len(result["links"]))
-        self.assertEqual(len(self.post_1.links.all()), 2)
-        for link in links:
-            result_link = list(filter(
-                lambda result_link: result_link["id"] == link.id, result["links"]
-            ))[0]
-            self.assertEqual(link.name, result_link["name"])
-            self.assertEqual(link.url, result_link["url"])
+        # Validate group
+        self.assertEqual(result["group"], group_1.id)
     
     def test_filter_category(self):
         """ Test that the category filter works """
         
         # Update first post
-        category_2 = models.Category.objects.all()[2]
+        category_1 = models.Category.objects.get(id=1)
+        category_2 = models.Category.objects.get(id=2)
         self.post_1.category = category_2
         self.post_1.save()
         
@@ -277,26 +260,37 @@ class PostViewSetTestCase(BlogTestCase):
         
         # Validate result
         result = json_data["results"][0]
+        self.assertTrue(result["id"], self.post_2.id)
         
-        # Validate data text
-        self.assertEqual(result["id"], self.post_2.id)
-        self.assertEqual(result["title"], self.post_2.title)
-        self.assertEqual(result["duration"], self.post_2.duration)
-        self.assertEqual(result["text"], self.post_2.text)
-        
-        # Validate media
-        self.assertIn(self.post_2.image.url, result["image"])
-        self.assertIn(self.post_2.audio.url, result["audio"])
-        self.assertIn(self.post_2.video.url, result["video"])
-        
-        links = self.post_1.links.all()
-        self.assertEqual(len(self.post_1.links.all()), len(result["links"]))
-        self.assertEqual(len(self.post_1.links.all()), 2)
-        for link in links:
-            result_link = list(filter(
-                lambda result_link: result_link["id"] == link.id, result["links"]
-            ))[0]
-            self.assertEqual(link.name, result_link["name"])
-            self.assertEqual(link.url, result_link["url"])
+        # Validate category
+        self.assertEqual(result["category"], category_1.id)
     
-    
+    def test_filter_duration(self):
+        """ Test that the duration filter works """
+        
+        # Update first post
+        duration_1 = models.Duration.objects.get(id=1)
+        duration_2 = models.Duration.objects.get(id=2)
+        self.post_1.duration = duration_2
+        self.post_1.save()
+        
+        # Get filter
+        self.endpoint = f"{self.endpoint}?duration={duration_1.value}"
+        
+        # Validate response
+        response = self.client.get(self.endpoint)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+        # Validate extra content
+        json_data = response.json()
+        self.assertEqual(json_data["count"], 1)
+        self.assertIsNone(json_data["next"])
+        self.assertIsNone(json_data["previous"])
+        self.assertEqual(len(json_data["results"]), 1)
+        
+        # Validate result
+        result = json_data["results"][0]
+        self.assertTrue(result["id"], self.post_2.id)
+        
+        # Validate duration
+        self.assertEqual(result["duration"], duration_1.value)

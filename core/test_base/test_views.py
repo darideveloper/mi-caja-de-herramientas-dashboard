@@ -62,13 +62,13 @@ class BlogTestCase(APITestCase):
     def create_post(
         self,
         title: str,
-        duration: int,
         text: str,
         image_name: str,
         audio_name: str,
         video_name: str,
         group: models.Group = None,
         category: models.Category = None,
+        duration: models.Duration = None,
         links: list[models.Link] = None
     ) -> models.Post:
         """Create a post with the given title, content, group and category.
@@ -97,6 +97,9 @@ class BlogTestCase(APITestCase):
             
         if not links:
             links = models.Link.objects.all()
+            
+        if not duration:
+            duration = models.Duration.objects.first()
             
         # Create media
         image_path = os.path.join(self.images_path, image_name)
