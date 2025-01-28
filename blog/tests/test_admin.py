@@ -98,7 +98,7 @@ class PostRenderedDataTestCase(TestMediaAdminBase):
             title="Test post",
             group=models.Group.objects.create(name="Para dejar de compararte"),
             category=models.Category.objects.create(name="Meditación"),
-            duration=10,
+            duration=models.Duration.objects.create(value=5),
             text="#this is a \n **sample text**",
         )
         

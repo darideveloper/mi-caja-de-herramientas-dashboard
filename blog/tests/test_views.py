@@ -294,3 +294,91 @@ class PostViewSetTestCase(BlogTestCase):
         
         # Validate duration
         self.assertEqual(result["duration"], duration_1.value)
+        
+        
+class RandomPostViewSetTestCase(BlogTestCase):
+
+    def setUp(self):
+        # Set endpoint
+        super().setUp(endpoint="/api/random-post/")
+        
+        # Create posts
+        self.post_1 = self.create_post(
+            title="Post 1",
+            text="Post 1 text",
+            image_name="sample.webp",
+            audio_name="sample.mp3",
+            video_name="sample.mp4",
+        )
+        self.post_2 = self.create_post(
+            title="Post 2",
+            text="Post 2 text",
+            image_name="sample.webp",
+            audio_name="sample.mp3",
+            video_name="sample.mp4",
+        )
+
+    def test_unauthenticated_user_get(self):
+        """ Test that unauthenticated users can not access the endpoint """
+        
+        # Validate response
+        self.client.logout()
+        response = self.client.get(self.endpoint)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        
+    def test_authenticated_user_get(self):
+        """ Test that authenticated users can access the endpoint """
+        
+        # Validate response
+        response = self.client.get(self.endpoint)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+        # Validate extra content
+        json_data = response.json()
+        self.assertEqual(json_data["count"], 1)
+        self.assertIsNone(json_data["next"])
+        self.assertIsNone(json_data["previous"])
+        self.assertEqual(len(json_data["results"]), 1)
+        
+        # Loop through posts
+        result = json_data["results"][0]
+        result_id = result["id"]
+        post = models.Post.objects.get(id=result_id)
+        
+        # Validate data text
+        self.assertEqual(post.title, result["title"])
+        self.assertEqual(post.duration.value, result["duration"])
+        self.assertEqual(post.text, result["text"])
+        
+        # Validate data links
+        links = post.links.all()
+        self.assertEqual(len(post.links.all()), len(result["links"]))
+        self.assertEqual(len(post.links.all()), 2)
+        for link in links:
+            result_link = list(filter(
+                lambda result_link: result_link["id"] == link.id, result["links"]
+            ))[0]
+            self.assertEqual(link.name, result_link["name"])
+            self.assertEqual(link.url, result_link["url"])
+        
+        self.assertIn(post.image.url, result["image"])
+        self.assertIn(post.audio.url, result["audio"])
+        self.assertIn(post.video.url, result["video"])
+    
+    def test_authenticated_user_post(self):
+        """ Test that authenticated users can not post to the endpoint """
+        
+        self.validate_invalid_method("post")
+        
+    def test_authenticated_user_put(self):
+        """ Test that authenticated users can not put to the endpoint """
+        
+        # add id to endpoint
+        self.endpoint = f"{self.endpoint}1/"
+        self.validate_invalid_method("put")
+        
+    def test_authenticated_user_patch(self):
+        
+        # add id to endpoint
+        self.endpoint = f"{self.endpoint}1/"
+        self.validate_invalid_method("patch")

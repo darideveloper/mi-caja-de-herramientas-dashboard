@@ -13,31 +13,26 @@ from blog import views as blog_views
 
 # Setup drf router
 router = routers.DefaultRouter()
-router.register(r'groups', blog_views.GroupViewSet)
-router.register(r'categories', blog_views.CategoryViewSet)
-router.register(r'posts', blog_views.PostViewSet)
+router.register(r"groups", blog_views.GroupViewSet)
+router.register(r"categories", blog_views.CategoryViewSet)
+router.register(r"posts", blog_views.PostViewSet)
+router.register(r"random-post", blog_views.RandomPostViewSet, basename="random-post")
 
 
 urlpatterns = [
     # Redirects
+    path("", RedirectView.as_view(url="/admin/"), name="home-redirect-admin"),
     path(
-        '',
-        RedirectView.as_view(url='/admin/'),
-        name='home-redirect-admin'
+        "accounts/login/",
+        RedirectView.as_view(url="/admin/"),
+        name="login-redirect-admin",
     ),
-    path(
-        'accounts/login/',
-        RedirectView.as_view(url='/admin/'),
-        name='login-redirect-admin'
-    ),
-    
     # Apps
-    path('admin/', admin.site.urls),
-    
+    path("admin/", admin.site.urls),
     # Drf
-    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'),
-    path('api/', include(router.urls)),
+    path("api/token/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", CustomTokenRefreshView.as_view(), name="token_refresh"),
+    path("api/", include(router.urls)),
 ]
 
 if not settings.STORAGE_AWS:

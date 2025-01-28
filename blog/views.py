@@ -42,3 +42,19 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(duration__value=duration)
             
         return queryset
+
+
+class RandomPostViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = models.Post.objects.all()
+    serializer_class = serializers.PostSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_queryset(self):
+        """ Filter in get params """
+        
+        queryset = models.Post.objects.all()
+        
+        # Get random post
+        queryset = queryset.order_by("?")[:1]
+        
+        return queryset
