@@ -251,6 +251,7 @@ JAZZMIN_SETTINGS = {
         "blog.group": "fas fa-box",
         "blog.category": "fas fa-hashtag",
         "blog.link": "fas fa-link",
+        "blog.duration": "fas fa-clock",
         "blog.post": "fas fa-solid fa-file",
     },
     # Icons that are used when one is not manually specified

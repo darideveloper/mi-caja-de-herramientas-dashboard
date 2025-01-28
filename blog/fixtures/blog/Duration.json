@@ -1,0 +1,37 @@
+[
+    {
+        "model": "blog.Duration",
+        "pk": 1,
+        "fields": {
+            "value": 3
+        }
+    },
+    {
+        "model": "blog.Duration",
+        "pk": 2,
+        "fields": {
+            "value": 5
+        }
+    },
+    {
+        "model": "blog.Duration",
+        "pk": 3,
+        "fields": {
+            "value": 10
+        }
+    },
+    {
+        "model": "blog.Duration",
+        "pk": 4,
+        "fields": {
+            "value": 15
+        }
+    },
+    {
+        "model": "blog.Duration",
+        "pk": 5,
+        "fields": {
+            "value": 20
+        }
+    }
+]

@@ -15,6 +15,7 @@ class Command(BaseCommand):
                 "Group",
                 "Category",
                 "Link",
+                "Duration",
             ],
         }
         

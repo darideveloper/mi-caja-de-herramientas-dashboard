@@ -21,6 +21,12 @@ class LinkSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class DurationSerializer(serializers.Serializer):
+    class Meta:
+        model = models.Duration
+        fields = "__all__"
+
+
 class PostSerializer(serializers.ModelSerializer):
     links = LinkSerializer(many=True)
 

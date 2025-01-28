@@ -62,6 +62,20 @@ class Link(models.Model):
     class Meta:
         verbose_name = 'Link'
         verbose_name_plural = 'Links'
+    
+        
+class Duration(models.Model):
+    id = models.AutoField(primary_key=True)
+    value = models.IntegerField(
+        verbose_name='Duración (en minutos)'
+    )
+    
+    def __str__(self):
+        return f"{self.value} min"
+    
+    class Meta:
+        verbose_name = 'Duración'
+        verbose_name_plural = 'Duraciones'
 
 
 class Post(models.Model):
@@ -80,7 +94,9 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Categoría'
     )
-    duration = models.IntegerField(
+    duration = models.ForeignKey(
+        Duration,
+        on_delete=models.CASCADE,
         verbose_name='Duración (en minutos)'
     )
     text = models.TextField(
