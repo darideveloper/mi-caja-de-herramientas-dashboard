@@ -8,7 +8,7 @@ class GroupViewSetTestCase(BlogTestCase):
 
     def setUp(self):
         # Set endpoint
-        super().setUp(endpont="/api/groups/")
+        super().setUp(endpoint="/api/groups/")
 
     def test_unauthenticated_user_get(self):
         """ Test that unauthenticated users can not access the endpoint """
@@ -50,13 +50,13 @@ class GroupViewSetTestCase(BlogTestCase):
         """ Test that authenticated users can not put to the endpoint """
         
         # add id to endpoint
-        self.endpoint += "1/"
+        self.endpoint = f"{self.endpoint}1/"
         self.validate_invalid_method("put")
         
     def test_authenticated_user_patch(self):
         
         # add id to endpoint
-        self.endpoint += "1/"
+        self.endpoint = f"{self.endpoint}1/"
         self.validate_invalid_method("patch")
 
 
@@ -64,7 +64,7 @@ class CategoryViewSetTestCase(BlogTestCase):
 
     def setUp(self):
         # Set endpoint
-        super().setUp(endpont="/api/categories/")
+        super().setUp(endpoint="/api/categories/")
 
     def test_unauthenticated_user_get(self):
         """ Test that unauthenticated users can not access the endpoint """
@@ -106,13 +106,13 @@ class CategoryViewSetTestCase(BlogTestCase):
         """ Test that authenticated users can not put to the endpoint """
         
         # add id to endpoint
-        self.endpoint += "1/"
+        self.endpoint = f"{self.endpoint}1/"
         self.validate_invalid_method("put")
         
     def test_authenticated_user_patch(self):
         
         # add id to endpoint
-        self.endpoint += "1/"
+        self.endpoint = f"{self.endpoint}1/"
         self.validate_invalid_method("patch")
 
 
@@ -120,10 +120,10 @@ class PostViewSetTestCase(BlogTestCase):
 
     def setUp(self):
         # Set endpoint
-        super().setUp(endpont="/api/posts/")
+        super().setUp(endpoint="/api/posts/")
         
         # Create posts
-        self.create_post(
+        self.post_1 = self.create_post(
             title="Post 1",
             duration=10,
             text="Post 1 text",
@@ -131,7 +131,7 @@ class PostViewSetTestCase(BlogTestCase):
             audio_name="sample.mp3",
             video_name="sample.mp4",
         )
-        self.create_post(
+        self.post_2 = self.create_post(
             title="Post 2",
             duration=20,
             text="Post 2 text",
@@ -198,12 +198,105 @@ class PostViewSetTestCase(BlogTestCase):
         """ Test that authenticated users can not put to the endpoint """
         
         # add id to endpoint
-        self.endpoint += "1/"
+        self.endpoint = f"{self.endpoint}1/"
         self.validate_invalid_method("put")
         
     def test_authenticated_user_patch(self):
         
         # add id to endpoint
-        self.endpoint += "1/"
+        self.endpoint = f"{self.endpoint}1/"
         self.validate_invalid_method("patch")
+    
+    def test_filter_group(self):
+        """ Test that the group filter works """
+        
+        # Update first post
+        group_2 = models.Group.objects.all()[2]
+        self.post_1.group = group_2
+        self.post_1.save()
+        
+        # Get filter
+        self.endpoint = f"{self.endpoint}?group=1"
+        
+        # Validate response
+        response = self.client.get(self.endpoint)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+        # Validate extra content
+        json_data = response.json()
+        self.assertEqual(json_data["count"], 1)
+        self.assertIsNone(json_data["next"])
+        self.assertIsNone(json_data["previous"])
+        self.assertEqual(len(json_data["results"]), 1)
+        
+        # Validate result
+        result = json_data["results"][0]
+        
+        # Validate data text
+        self.assertEqual(result["id"], self.post_2.id)
+        self.assertEqual(result["title"], self.post_2.title)
+        self.assertEqual(result["duration"], self.post_2.duration)
+        self.assertEqual(result["text"], self.post_2.text)
+        
+        # Validate media
+        self.assertIn(self.post_2.image.url, result["image"])
+        self.assertIn(self.post_2.audio.url, result["audio"])
+        self.assertIn(self.post_2.video.url, result["video"])
+        
+        links = self.post_1.links.all()
+        self.assertEqual(len(self.post_1.links.all()), len(result["links"]))
+        self.assertEqual(len(self.post_1.links.all()), 2)
+        for link in links:
+            result_link = list(filter(
+                lambda result_link: result_link["id"] == link.id, result["links"]
+            ))[0]
+            self.assertEqual(link.name, result_link["name"])
+            self.assertEqual(link.url, result_link["url"])
+    
+    def test_filter_category(self):
+        """ Test that the category filter works """
+        
+        # Update first post
+        category_2 = models.Category.objects.all()[2]
+        self.post_1.category = category_2
+        self.post_1.save()
+        
+        # Get filter
+        self.endpoint = f"{self.endpoint}?category=1"
+        
+        # Validate response
+        response = self.client.get(self.endpoint)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+        # Validate extra content
+        json_data = response.json()
+        self.assertEqual(json_data["count"], 1)
+        self.assertIsNone(json_data["next"])
+        self.assertIsNone(json_data["previous"])
+        self.assertEqual(len(json_data["results"]), 1)
+        
+        # Validate result
+        result = json_data["results"][0]
+        
+        # Validate data text
+        self.assertEqual(result["id"], self.post_2.id)
+        self.assertEqual(result["title"], self.post_2.title)
+        self.assertEqual(result["duration"], self.post_2.duration)
+        self.assertEqual(result["text"], self.post_2.text)
+        
+        # Validate media
+        self.assertIn(self.post_2.image.url, result["image"])
+        self.assertIn(self.post_2.audio.url, result["audio"])
+        self.assertIn(self.post_2.video.url, result["video"])
+        
+        links = self.post_1.links.all()
+        self.assertEqual(len(self.post_1.links.all()), len(result["links"]))
+        self.assertEqual(len(self.post_1.links.all()), 2)
+        for link in links:
+            result_link = list(filter(
+                lambda result_link: result_link["id"] == link.id, result["links"]
+            ))[0]
+            self.assertEqual(link.name, result_link["name"])
+            self.assertEqual(link.url, result_link["url"])
+    
     

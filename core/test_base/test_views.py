@@ -20,7 +20,7 @@ class BlogTestCase(APITestCase):
         # Load fixtures
         call_command("apps_loaddata")
     
-    def setUp(self, endpont="/api/"):
+    def setUp(self, endpoint="/api/"):
         
         # Create admin user and login to client
         self.admin_user, self.admin_pass, self.user = self.create_admin_user()
@@ -28,7 +28,7 @@ class BlogTestCase(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.token}")
         
         # Update endpoint
-        self.endpoint = endpont
+        self.endpoint = endpoint
         
         # File paths
         self.current_path = os.path.dirname(os.path.abspath(__file__))
