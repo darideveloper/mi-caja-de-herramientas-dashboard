@@ -206,4 +206,18 @@ input[type=checkbox], input[type=radio] {
 
 #result_list td .field-logo, #result_list td .field-image, #result_list td .field-video, #result_list td .field-audio, #result_list td .field-icon {
   text-align: left;
+}
+
+.small.quiet {
+  margin: 0 10px !important;
+}
+
+[role=status] input[type=submit] {
+  margin: 0 10px !important;
+}
+
+@media screen and (max-width: 600px) {
+  footer.main-footer {
+    text-align: center !important;
+  }
 }/*# sourceMappingURL=custom.css.map */
