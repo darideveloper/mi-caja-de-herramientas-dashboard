@@ -18,13 +18,12 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     
 class PostViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Post.objects.all()
-    serializer_class = serializers.PostSerializer
     permission_classes = [permissions.IsAuthenticated]
     
     def get_queryset(self):
         """ Filter in get params """
         
-        queryset = models.Post.objects.all()
+        queryset = models.Post.objects.all().order_by("-created_at")
         
         # Filter by group
         group = self.request.query_params.get("group", None)
@@ -42,6 +41,14 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(duration__value=duration)
             
         return queryset
+    
+    def get_serializer_class(self, *args, **kwargs):
+        """ Return summary serializer if summary param is passed """
+        
+        if self.request.query_params.get("summary", None):
+            return serializers.PostSerializerSummary
+        
+        return serializers.PostSerializer
 
 
 class RandomPostViewSet(viewsets.ReadOnlyModelViewSet):

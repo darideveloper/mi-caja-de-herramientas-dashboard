@@ -168,6 +168,7 @@ class PostViewSetTestCase(BlogTestCase):
             result = list(filter(lambda result: result["id"] == post.id, results))[0]
             
             # Validate data text
+            self.assertEqual(post.id, result["id"])
             self.assertEqual(post.title, result["title"])
             self.assertEqual(post.duration.value, result["duration"])
             self.assertEqual(post.text, result["text"])
@@ -294,6 +295,33 @@ class PostViewSetTestCase(BlogTestCase):
         
         # Validate duration
         self.assertEqual(result["duration"], duration_1.value)
+        
+    def test_get_summary(self):
+        """ Test that authenticated users can access the endpoint
+        and use the summary parameter to get a summary of the posts
+        """
+        
+        # Remove video from first post
+        posts = models.Post.objects.all()
+        self.post_1.video = None
+        self.post_1.save()
+        
+        # Expected post types
+        post_types = ["audio", "video"]
+        
+        # Get data
+        response = self.client.get(f"{self.endpoint}?summary=true")
+        json_data = response.json()
+        
+        # Validate each post data
+        results = json_data["results"]
+        for post in posts:
+            post_index = post.id - 1
+            result = list(filter(lambda result: result["id"] == post.id, results))[0]
+            
+            self.assertEqual(post.id, result["id"])
+            self.assertEqual(post.title, result["title"])
+            self.assertEqual(result["post_type"], post_types[post_index])
         
         
 class RandomPostViewSetTestCase(BlogTestCase):

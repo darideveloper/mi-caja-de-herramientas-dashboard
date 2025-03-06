@@ -34,3 +34,23 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Post
         fields = "__all__"
+
+
+class PostSerializerSummary(serializers.ModelSerializer):
+    post_type = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Post
+        fields = ['id', 'title', 'post_type']
+        
+    def get_post_type(self, obj):
+        
+        post_type = ""
+        if obj.video:
+            post_type = "video"
+        elif obj.audio:
+            post_type = "audio"
+        elif obj.links:
+            post_type = "social"
+            
+        return post_type
