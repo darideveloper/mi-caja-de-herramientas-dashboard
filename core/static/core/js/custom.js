@@ -14,8 +14,8 @@ class AdminSetup {
       "icon": '.field-icon a',
       "image": '.field-image a',
       "url": 'td.field-url, .field-url a',
-      "video": '.field-video a',
-      "audio": '.field-audio a',
+      "video": '.field-video_link a',
+      "audio": '.field-audio_link a',
     }
 
     // Autorun functions

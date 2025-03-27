@@ -115,17 +115,13 @@ class Post(models.Model):
         null=True,
         blank=True,
     )
-    audio = models.FileField(
-        upload_to='audios/',
+    audio_link = models.URLField(
         verbose_name='Audio',
-        validators=[validators.validate_audio_extension],
         null=True,
         blank=True,
     )
-    video = models.FileField(
-        upload_to='videos/',
+    video_link = models.URLField(
         verbose_name='Video',
-        validators=[validators.validate_video_extension],
         null=True,
         blank=True,
     )

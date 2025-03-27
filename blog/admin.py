@@ -51,7 +51,7 @@ class PostAdmin(admin.ModelAdmin):
         (
             'Multimedia', {
                 'fields': (
-                    'image', 'video', 'audio'
+                    'image', 'video_link', 'audio_link'
                 )
             }
         ),
