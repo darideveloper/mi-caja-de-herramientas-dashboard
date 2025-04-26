@@ -2,3 +2,7 @@
 /static
 /staticfiles
 info.txt
+__pycache__/
+.env*
+.log
+*pyc
