@@ -127,15 +127,15 @@ class PostViewSetTestCase(BlogTestCase):
             title="Post 1",
             text="Post 1 text",
             image_name="sample.webp",
-            audio_name="sample.mp3",
-            video_name="sample.mp4",
+            audio_link="https://www.test.com/sample.mp3",
+            video_link="https://www.test.com/sample.mp4",
         )
         self.post_2 = self.create_post(
             title="Post 2",
             text="Post 2 text",
             image_name="sample.webp",
-            audio_name="sample.mp3",
-            video_name="sample.mp4",
+            audio_link="https://www.test.com/sample.mp3",
+            video_link="https://www.test.com/sample.mp4",
         )
 
     def test_unauthenticated_user_get(self):
@@ -185,8 +185,8 @@ class PostViewSetTestCase(BlogTestCase):
                 self.assertEqual(link.url, result_link["url"])
             
             self.assertIn(post.image.url, result["image"])
-            self.assertIn(post.audio.url, result["audio"])
-            self.assertIn(post.video.url, result["video"])
+            self.assertIn(post.audio_link, result["audio_link"])
+            self.assertIn(post.video_link, result["video_link"])
     
     def test_authenticated_user_post(self):
         """ Test that authenticated users can not post to the endpoint """
@@ -234,7 +234,7 @@ class PostViewSetTestCase(BlogTestCase):
         self.assertTrue(result["id"], self.post_2.id)
         
         # Validate group
-        self.assertEqual(result["group"], group_1.id)
+        self.assertEqual(result["group"]["name"], group_1.name)
     
     def test_filter_category(self):
         """ Test that the category filter works """
@@ -264,7 +264,7 @@ class PostViewSetTestCase(BlogTestCase):
         self.assertTrue(result["id"], self.post_2.id)
         
         # Validate category
-        self.assertEqual(result["category"], category_1.id)
+        self.assertEqual(result["category"]["name"], category_1.name)
     
     def test_filter_duration(self):
         """ Test that the duration filter works """
@@ -302,8 +302,7 @@ class PostViewSetTestCase(BlogTestCase):
         """
         
         # Remove video from first post
-        posts = models.Post.objects.all()
-        self.post_1.video = None
+        self.post_1.video_link = None
         self.post_1.save()
         
         # Expected post types
@@ -314,6 +313,8 @@ class PostViewSetTestCase(BlogTestCase):
         json_data = response.json()
         
         # Validate each post data
+        posts = models.Post.objects.all()
+        print(posts)
         results = json_data["results"]
         for post in posts:
             post_index = post.id - 1
@@ -335,15 +336,15 @@ class RandomPostViewSetTestCase(BlogTestCase):
             title="Post 1",
             text="Post 1 text",
             image_name="sample.webp",
-            audio_name="sample.mp3",
-            video_name="sample.mp4",
+            audio_link="https://www.test.com/sample.mp3",
+            video_link="https://www.test.com/sample.mp4",
         )
         self.post_2 = self.create_post(
             title="Post 2",
             text="Post 2 text",
             image_name="sample.webp",
-            audio_name="sample.mp3",
-            video_name="sample.mp4",
+            audio_link="https://www.test.com/sample.mp3",
+            video_link="https://www.test.com/sample.mp4",
         )
 
     def test_unauthenticated_user_get(self):
@@ -390,8 +391,8 @@ class RandomPostViewSetTestCase(BlogTestCase):
             self.assertEqual(link.url, result_link["url"])
         
         self.assertIn(post.image.url, result["image"])
-        self.assertIn(post.audio.url, result["audio"])
-        self.assertIn(post.video.url, result["video"])
+        self.assertEqual(post.audio_link, result["audio_link"])
+        self.assertEqual(post.video_link, result["video_link"])
     
     def test_authenticated_user_post(self):
         """ Test that authenticated users can not post to the endpoint """

@@ -64,8 +64,8 @@ class BlogTestCase(APITestCase):
         title: str,
         text: str,
         image_name: str,
-        audio_name: str,
-        video_name: str,
+        audio_link: str,
+        video_link: str,
         group: models.Group = None,
         category: models.Category = None,
         duration: models.Duration = None,
@@ -103,23 +103,11 @@ class BlogTestCase(APITestCase):
             
         # Create media
         image_path = os.path.join(self.images_path, image_name)
-        video_path = os.path.join(self.videos_path, video_name)
-        audio_path = os.path.join(self.audios_path, audio_name)
         
         image_file = SimpleUploadedFile(
             name=image_name,
             content=open(image_path, "rb").read(),
             content_type="image/webp"
-        )
-        video_file = SimpleUploadedFile(
-            name=video_name,
-            content=open(video_path, "rb").read(),
-            content_type="video/mp4"
-        )
-        audio_file = SimpleUploadedFile(
-            name=audio_name,
-            content=open(audio_path, "rb").read(),
-            content_type="audio/mp3"
         )
 
         # Create post
@@ -130,8 +118,8 @@ class BlogTestCase(APITestCase):
             duration=duration,
             text=text,
             image=image_path,
-            audio=audio_path,
-            video=video_path,
+            audio_link=audio_link,
+            video_link=video_link,
         )
         
         # Add links
@@ -140,8 +128,6 @@ class BlogTestCase(APITestCase):
         
         # Add media
         post.image = image_file
-        post.audio = audio_file
-        post.video = video_file
         post.save()
         
         return post

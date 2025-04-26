@@ -179,29 +179,3 @@ class TestMediaAdminBase(TestAdminBase):
         self.assertTrue(fields["image"].get_attribute("src"))
         self.assertTrue(fields["image_link"].get_attribute("href"))
         self.assertEqual(fields["image_link"].get_attribute("target"), "_blank")
-        
-    def rendered_video_test_base(self):
-        """ Validate video is rendered as video tag """
-        
-        # css selectors
-        selectors = {
-            "video_source": ".field-video a video source",
-        }
-        
-        # Validate video is rendered as video tag
-        fields = self.get_selenium_elems(selectors)
-        self.assertTrue(fields["video_source"].get_attribute("src"))
-        self.assertEqual(fields["video_source"].get_attribute("type"), "video/mp4")
-        
-    def rendered_audio_test_base(self):
-        """ Validate audio is rendered as audio tag """
-        
-        # css selectors
-        selectors = {
-            "audio_source": ".field-audio a audio source",
-        }
-        
-        # Validate audio is rendered as audio tag
-        fields = self.get_selenium_elems(selectors)
-        self.assertTrue(fields["audio_source"].get_attribute("src"))
-        self.assertEqual(fields["audio_source"].get_attribute("type"), "audio/mp3")

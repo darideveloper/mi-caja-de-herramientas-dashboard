@@ -159,5 +159,3 @@ class PostRenderedDataTestCase(TestMediaAdminBase):
         
         # Validate media
         self.rendered_image_test_base()
-        self.rendered_video_test_base()
-        self.rendered_audio_test_base()

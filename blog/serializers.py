@@ -48,11 +48,11 @@ class PostSerializerSummary(serializers.ModelSerializer):
     def get_post_type(self, obj):
         
         post_type = ""
-        if obj.video:
+        if obj.video_link:
             post_type = "video"
-        elif obj.audio:
+        elif obj.audio_link:
             post_type = "audio"
         elif obj.links:
             post_type = "social"
-            
+                        
         return post_type
