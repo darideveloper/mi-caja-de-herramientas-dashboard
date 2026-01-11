@@ -3,7 +3,9 @@
 /staticfiles
 info.txt
 __pycache__/
-.env*
+.env
+.env.dev
+.env.prod
 .log
 *pyc
 temp.*
